@@ -86,7 +86,24 @@
                 ],
                 "linkAgreement": "https://single-market-economy.ec.europa.eu/publications/memorandum-understanding-eu-zambia-sustainable-raw-materials_en?prefLang=de",
                 "sources": ""
+            },
+            {
+                "country": "South Africa",
+                "typeAgreement": "MoU on a strategic partnership on sustainable minerals and metals value chains",
+                "year": "2025-11-19",
+                "minerals": "PGMs, Manganese, Rare Earth Elements, vanadium, chromium, and titanium. Also covers all non-fossil fuel minerals.",
+                "areasCoop": [
+                    "Economic linkages and diversification",
+                    "Capital mobilization",
+                    "Sustainable governance",
+                    "Knowledge and capacity building"
+                ],
+                "linkAgreement": "https://resourcecontracts.org/contract/ocds-591adf-7893160858/download/pdf",
+                "sources": "https://www.consilium.europa.eu/en/meetings/international-summit/2025/11/20/"
             }
+            
+
+
         ]
     },
     {
@@ -959,33 +976,40 @@
         "nonafrican": "USA",
         "partnership": [
 
+
             {
                 "country": "Democratic Republic of the Congo",
-                "typeAgreement": "Strategic Partnership Agreement ",
-                "year": "2025-12-04",
-                "minerals": "",
-                "areasCoop": [
-                    "Sustainable governance",
-                    "Economic linkages and diversification",
-                    "Capital mobilization"
-                ],
-                "linkAgreement": "https://www.state.gov/strategic-partnership-agreement-between-the-government-of-the-united-states-of-america-and-the-government-of-the-democratic-republic-of-the-congo",
-                "sources": "https://news.mongabay.com/2026/01/drc-plans-to-export-100000-metric-tons-of-copper-to-the-us/     https://bankable.africa/en/news/0712-2099-critical-minerals-security-taxation-inside-the-u-s-drc-strategic-minerals-cooperation-framework   "
+                "agreements": [
+                    {
+                        "typeAgreement": "Strategic Partnership Agreementg",
+                        "year": "2025-12-04",
+                        "minerals": "",
+                        "areasCoop": [
+                            "Sustainable governance",
+                            "Economic linkages and diversification",
+                            "Capital mobilization"
+                        ],
+                        "linkAgreement": "https://www.state.gov/strategic-partnership-agreement-between-the-government-of-the-united-states-of-america-and-the-government-of-the-democratic-republic-of-the-congo",
+                        "sources": "https://news.mongabay.com/2026/01/drc-plans-to-export-100000-metric-tons-of-copper-to-the-us/     https://bankable.africa/en/news/0712-2099-critical-minerals-security-taxation-inside-the-u-s-drc-strategic-minerals-cooperation-framework   "
+                    },
+                    {
+                        
+                        "typeAgreement": "MoU on the Support for the Development of a Value Chain in the Electric Vehicles Battery Sector",
+                        "year": "2022-12-13",
+                        "minerals": "",
+                        "areasCoop": [
+                            "Knowledge and capacity building",
+                            "Economic linkages and diversification",
+                            "Capital mobilization"
+                        ],
+                        "linkAgreement": "https://www.state.gov/wp-content/uploads/2023/01/2023.01.13-E-4-Release-MOU-USA-DRC-ZAMBIA-Tripartite-Agreement-Tab-1-MOU-for-U.S.-Assistance-to-Support-DRC-Zambia-EV-Value-Chain-Cooperation-Instrument.pdf",
+                        "sources": ""
+                    }
+                ]
             },
-            
-            {
-                "country": "Democratic Republic of the Congo",
-                "typeAgreement": "MoU on the Support for the Development of a Value Chain in the Electric Vehicles Battery Sector",
-                "year": "2022-12-13",
-                "minerals": "",
-                "areasCoop": [
-                    "Knowledge and capacity building",
-                    "Economic linkages and diversification",
-                    "Capital mobilization"
-                ],
-                "linkAgreement": "https://www.state.gov/wp-content/uploads/2023/01/2023.01.13-E-4-Release-MOU-USA-DRC-ZAMBIA-Tripartite-Agreement-Tab-1-MOU-for-U.S.-Assistance-to-Support-DRC-Zambia-EV-Value-Chain-Cooperation-Instrument.pdf",
-                "sources": ""
-            },
+
+        
+        
             {
                 "country": "Zambia",
                 "typeAgreement": "MoU on the Support for the Development of a Value Chain in the Electric Vehicles Battery Sector",
