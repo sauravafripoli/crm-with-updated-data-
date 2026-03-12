@@ -42,6 +42,8 @@ import {
 import { showThirdColumn, removeThirdColumn } from "./modules/layout.js";
 import { showPickerBilateral, showPickerMultilateral, showPickerAfrica } from "./modules/picker.js";
 
+const euGeojsonPath = `${themeUrl}/db/eu.geojson`;
+
 let partnerMap = {};
 let multilateralMap = {};
 let filteredGeoJSON;
@@ -227,14 +229,35 @@ Promise.all([
           handleSelection("multilateral", item.textContent);
           const selectedBloc = this.textContent.trim();
           const selectedColor = blocColors[selectedBloc] || "#ccc";
-          createBlocGeoJSON(geojsonUrl, multiJsonFilePath, selectedBloc)
+          createBlocGeoJSON(geojsonUrl, multiJsonFilePath, selectedBloc, euGeojsonPath)
             .then((filteredGeoJSON) => {
               deleteCountryLabels(filteredGeoJSON);
               destroyMap();
-              drawMap(mergedBiData, filteredGeoJSON, selectedBloc);
+              
+              // Merge filteredGeoJSON features with mergedBiData to include EU feature
+              const mergedMapData = {
+                type: "FeatureCollection",
+                features: [...mergedBiData.features]
+              };
+              
+              // Add features from filteredGeoJSON that don't exist in mergedBiData
+              const existingNames = new Set(mergedBiData.features.map(f => f.properties.name));
+              filteredGeoJSON.features.forEach(feature => {
+                if (!existingNames.has(feature.properties.name)) {
+                  mergedMapData.features.push(feature);
+                }
+              });
+              
+              drawMap(mergedMapData, filteredGeoJSON, selectedBloc);
               highlightBloc(svg, filteredGeoJSON, selectedColor, selectedBloc);
               const toggleButton = document.getElementById("toggleLabels");
-              toggleButton.classList.remove("active");
+              // Don't force toggle off - let user control persist
+              // Check current state and apply it
+              console.log("Toggle button active?", toggleButton.classList.contains("active"));
+              if (toggleButton.classList.contains("active")) {
+                console.log("Calling addCountryLabels");
+                addCountryLabels(filteredGeoJSON);
+              }
               populateMultilateral(
                 filteredGeoJSON,
                 selectedBloc,

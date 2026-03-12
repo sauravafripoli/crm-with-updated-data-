@@ -131,8 +131,12 @@ export async function mergeMulti(geojsonUrl, multiJsonFilePath) {
 export async function createBlocGeoJSON(
   geojsonUrl,
   multiJsonFilePath,
-  targetBlocName
+  targetBlocName,
+  euGeojsonPath
 ) {
+  console.log("====== createBlocGeoJSON CALLED ======");
+  console.log("targetBlocName:", targetBlocName);
+  console.log("euGeojsonPath:", euGeojsonPath);
   try {
     const geojsonResponse = await fetch(geojsonUrl);
     const geojsonData = await geojsonResponse.json();
@@ -141,16 +145,40 @@ export async function createBlocGeoJSON(
     const multiJsonData = await multiJsonResponse.json();
 
     let targetMembers = [];
+    let hasEUKey = false;
+    let euCountries = [];
+    let explicitCountries = [];
+    
     multiJsonData.forEach((bloc) => {
       if (bloc.blocName === targetBlocName) {
-        //console.log("Type of bloc members", typeof bloc.members);
+        console.log("Found bloc:", targetBlocName);
+        console.log("Type of bloc members", typeof bloc.members);
         if (Array.isArray(bloc.members)) {
           targetMembers = bloc.members;
         } else {
-          //console.log("bloc members", bloc.members);
+          console.log("bloc members structure:", bloc.members);
+          
+          // First, collect countries from "countries" array
+          if (bloc.members.countries) {
+            explicitCountries = bloc.members.countries;
+          }
+          
+          // Add all members
           for (let key in bloc.members) {
-            //console.log("key", key);
-            if (bloc.members[key]) {
+            console.log("Processing key:", key);
+            if (key === "EU") {
+              // Track that EU exists for loading EU GeoJSON
+              hasEUKey = true;
+              euCountries = bloc.members.EU;
+              targetMembers.push("EU");
+              // Only add EU countries that are ALSO in the explicit countries array
+              bloc.members.EU.forEach((item) => {
+                if (explicitCountries.includes(item)) {
+                  targetMembers.push(item);
+                }
+              });
+              console.log("Found EU key! Added EU and explicitly mentioned EU countries to targetMembers");
+            } else if (bloc.members[key]) {
               bloc.members[key].forEach((item) => {
                 targetMembers.push(item);
               });
@@ -159,9 +187,34 @@ export async function createBlocGeoJSON(
         }
       }
     });
+    
+    console.log("hasEUKey:", hasEUKey);
+    console.log("targetMembers:", targetMembers);
+    
+    // Load EU GeoJSON and add it to the world data if EU key exists
+    if (hasEUKey && euGeojsonPath) {
+      console.log("Loading EU GeoJSON from:", euGeojsonPath);
+      try {
+        const euResponse = await fetch(euGeojsonPath);
+        const euData = await euResponse.json();
+        console.log("EU GeoJSON loaded:", euData);
+        // Add EU feature to the world GeoJSON
+        if (euData.features && euData.features.length > 0) {
+          geojsonData.features.push(euData.features[0]);
+          console.log("Added EU feature to geojsonData. EU feature name:", euData.features[0].properties.name);
+        }
+      } catch (euError) {
+        console.error("Could not load EU GeoJSON:", euError);
+      }
+    } else {
+      console.log("Not loading EU GeoJSON. hasEUKey:", hasEUKey, "euGeojsonPath:", euGeojsonPath);
+    }
+    
     const filteredFeatures = geojsonData.features.filter((feature) => {
       return targetMembers.includes(feature.properties.name);
     });
+    console.log("Filtered features count:", filteredFeatures.length);
+    console.log("Filtered features names:", filteredFeatures.map(f => f.properties.name));
     //console.log("Target members", targetMembers);
     // Create a new GeoJSON object with the filtered features
     const filteredGeoJSON = {

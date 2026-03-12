@@ -86,6 +86,7 @@ export function highlightEu(svg, filteredGeoJSON) {
     "Rwanda",
     "Namibia",
     "Democratic Republic of the Congo",
+    "South Africa",
   ]);
   // Crear un nuevo arreglo excluyendo los países
   const updatedCountries = Array.from(euCountries).filter(
@@ -757,8 +758,33 @@ export function populateMultilateral(multiData, selectedBloc, multiJsonData) {
   let activeTooltip = null;
   const isMobile = window.innerWidth <= 768; // Si el ancho de la pantalla es menor o igual a 768px, asumimos que es móvil
 
+  // Check if EU exists in the original data and filter display accordingly
+  const blocData = multiJsonData.find((item) => item.blocName === nombre);
+  let displayCountries = blocCountries;
+  
+  if (blocData && blocData.members && typeof blocData.members === 'object' && !Array.isArray(blocData.members)) {
+    if (blocData.members.EU && blocData.members.countries) {
+      // Get list of countries that are explicitly in the "countries" array
+      const explicitCountries = blocData.members.countries;
+      const euCountriesList = blocData.members.EU;
+      
+      // Display: countries from "countries" array + EU, but exclude EU countries that are NOT in "countries" array
+      displayCountries = blocCountries.filter(country => {
+        const name = country.properties.name;
+        // Keep if it's EU
+        if (name === "EU") return true;
+        // Keep if it's in the explicit countries list
+        if (explicitCountries.includes(name)) return true;
+        // Keep if it's NOT an EU country (e.g., non-EU countries)
+        if (!euCountriesList.includes(name)) return true;
+        // Exclude EU countries that are NOT explicitly in the countries list
+        return false;
+      });
+    }
+  }
+
   // Crear la lista de países con íconos y tooltips
-  blocCountries.forEach((country, index) => {
+  displayCountries.forEach((country, index) => {
     // Crear el contenedor del país
     const countryItem = document.createElement("div");
     countryItem.className = "country-item";

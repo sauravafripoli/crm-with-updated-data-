@@ -113,8 +113,6 @@ function zoomedBorrar(event) {
 }
 //aumentar un parametro para identificar el pais y con ello hacer el zoom mas personalizado para cada uno
 export function drawMap(geojson, filteredCountryGeoJSON, partner) {
-  console.log('Filter country geojson in drawmap', filteredCountryGeoJSON);
-  console.log('Partner in drawmap', partner);
   banderaBoton = true;
   // Establecer el viewBox inicial
   svg.attr("viewBox", `-100 0 1000 600`);
@@ -143,7 +141,6 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
         clicked(event, d); // Solo llamar al método clicked si está en los países filtrados
       }
     });
-  //console.log(partner);
   const labels = g
     .selectAll("text")
     .data(filteredCountryGeoJSON.features)
@@ -154,7 +151,6 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
     .attr("y", (d) => path.centroid(d)[1])
     .attr("text-anchor", "middle")
     .attr("font-size", function (d) {
-      console.log(partner);
       if (partner === "EU") {
         return "3pt";
       } else if (partner === "Russia") {
@@ -179,6 +175,7 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
     })
     .attr("fill", "black")
     .style("pointer-events", "none") // Ignora eventos del mouse
+    .style("opacity", 0) // Start hidden, toggle will show them
 
     .each(function (d) {
       const countryName = d.properties.name;
@@ -327,11 +324,11 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
               .attr("y", path.centroid(d)[1] + i * 8 + 15) // Ajusta la separación entre líneas
               .text("OF AMERICA");
           } else {
-            /*textElement
+            textElement
               .append("tspan")
               .attr("x", path.centroid(d)[0])
-              .attr("y", path.centroid(d)[1] + i * 8) // Ajusta la separación entre líneas
-              .text(line);*/
+              .attr("y", path.centroid(d)[1] + i * 4) // Ajusta la separación entre líneas
+              .text(line);
           } //EU Raw Materials Club
         } else if (partner == "EU Raw Materials Club") {
           if (name == "PORTUGAL") {
@@ -621,6 +618,17 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
               .attr("x", path.centroid(d)[0] - 45)
               .attr("y", path.centroid(d)[1] + i * 8 + 0) // Ajusta la separación entre líneas
               .text("EUROPEAN UNION");
+          } else if (name == "SOUTH AFRICA") {
+            textElement
+              .append("tspan")
+              .attr("x", path.centroid(d)[0] - 5)
+              .attr("y", path.centroid(d)[1] + i * 8 + 4) // Ajusta la separación entre líneas
+              .text("SOUTH");
+            textElement
+              .append("tspan")
+              .attr("x", path.centroid(d)[0] - 5)
+              .attr("y", path.centroid(d)[1] + i * 8 + 9) // Ajusta la separación entre líneas
+              .text("AFRICA");
           }
         } else if (partner == "Critical Minerals Mapping Initiative") {
           if (name == "CANADA") {
@@ -704,11 +712,11 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
               .attr("y", path.centroid(d)[1] + i * 8 + 0) // Ajusta la separación entre líneas
               .text("EUROPEAN UNION");
           } else {
-            // textElement
-            //   .append("tspan")
-            //   .attr("x", path.centroid(d)[0])
-            //   .attr("y", path.centroid(d)[1] + i * 8) // Ajusta la separación entre líneas
-            //   .text(line);
+            textElement
+              .append("tspan")
+              .attr("x", path.centroid(d)[0])
+              .attr("y", path.centroid(d)[1] + i * 4) // Ajusta la separación entre líneas
+              .text(line);
           }
         } else if (partner == "Sustainable Critical Mineral Alliance") {
           if (name == "CANADA") {
@@ -797,7 +805,11 @@ export function drawMap(geojson, filteredCountryGeoJSON, partner) {
               .attr("y", path.centroid(d)[1] + i * 8 + 10) // Ajusta la separación entre líneas
               .text(line);
           } else {
-
+            textElement
+              .append("tspan")
+              .attr("x", path.centroid(d)[0])
+              .attr("y", path.centroid(d)[1] + i * 4) // Ajusta la separación entre líneas
+              .text(line);
           }
         } else if (partner == "Portugal") {
           if (name == "MOZAMBIQUE") {
@@ -1732,7 +1744,8 @@ export function addCountryLabels2(geojsonData) {
 
 export function addCountryLabels() {
   isCountryLabelsVisible = true;
-  d3.selectAll("text").transition().duration(500).style("opacity", 1); // Ocultar las etiquetas
+  const textElements = d3.selectAll("text");
+  textElements.transition().duration(500).style("opacity", 1); // Show the labels
 
   /* `
   if (currentZoom > 2) {
