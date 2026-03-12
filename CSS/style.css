@@ -1322,7 +1322,62 @@ img.zoom-out-active {
         padding-left: 15px;
         padding-top: 0.5rem;
     }
-
     
+    /* CRM Hero Map Theme */
+    .breadcrumb-area.hero-africa-map {
+        background-color: #4b351d !important;
+        background-image:
+            linear-gradient(104deg, rgba(46, 31, 16, 0.95) 0%, rgba(74, 51, 26, 0.9) 42%, rgba(105, 71, 35, 0.66) 72%, rgba(139, 95, 46, 0.48) 100%),
+            radial-gradient(circle at 14% 18%, rgba(252, 193, 44, 0.22) 0%, rgba(252, 193, 44, 0) 34%),
+            url("../img/bg/africa-map-pattern.svg") !important;
+        background-repeat: no-repeat, no-repeat, no-repeat !important;
+        background-size: cover, cover, 100% 100% !important;
+        background-position: center, center, center !important;
+    }
     
-}
+    .breadcrumb-area.hero-africa-map .title,
+    .breadcrumb-area.hero-africa-map .subtitle,
+    .breadcrumb-area.hero-africa-map .description,
+    .breadcrumb-area.hero-africa-map .downloadButton,
+    .breadcrumb-area.hero-africa-map .downloadButton a {
+        color: #f8fbff !important;
+    }
+    
+    #viewMoreBtn.hero-cta-toggle,
+    #viewLessBtn.hero-cta-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-top: 0.55rem;
+        padding: 0.62rem 1rem;
+        border-radius: 999px;
+        border: 1px solid #fcc12c;
+        background: #fcc12c;
+        color: #3b2812;
+        font-size: 0.7rem;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        text-decoration: none;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    #viewMoreBtn.hero-cta-toggle:hover,
+    #viewLessBtn.hero-cta-toggle:hover {
+        background: #ffe2a0;
+        color: #2d1d0b;
+        border-color: #ffe2a0;
+        box-shadow: 0 0 0 3px rgba(252, 193, 44, 0.26);
+        transform: translateY(-1px);
+    }
+    
+    #viewMoreBtn.hero-cta-toggle:focus-visible,
+    #viewLessBtn.hero-cta-toggle:focus-visible {
+        outline: 3px solid #ffffff;
+        outline-offset: 2px;
+    }
+    
+    #viewMoreBtn.hero-cta-toggle i,
+    #viewLessBtn.hero-cta-toggle i {
+        font-size: 0.82em;
+    }

@@ -13,7 +13,7 @@ $innov_settings = Innovation_Settings();
 include('header.inc.php');
 ?>
 <section>
-  <div class="breadcrumb-area">
+  <div class="breadcrumb-area apri-content">
     <div class="container">
       <div class="row">
         <div class="col-lg-10">
@@ -28,14 +28,14 @@ include('header.inc.php');
             <p class="description" id="descriptionText1">
               This strategic importance of critical minerals is increasing alongside intensifying geopolitical competition over future markets for green energy products. Consequently, multilateral and bilateral agreements between states regarding the production, access and processing of critical minerals are on the rise. Africa’s mineral wealth has attracted significant interest, positioning African states as key players in these partnerships.
               These agreements – often called “mineral partnerships,” “Memorandum of Understanding” (MoUs), or “cooperation agreements” – vary considerably in their content, format, and key actors. They may include provisions for value chain integration, joint ventures and knowledge sharing, among other areas.
-              <button id="viewMoreBtn" class="text-primary fs-lg ms-2">Show more <i class="icon-arrow-down"></i></button>
+              <button id="viewMoreBtn" class="text-primary fs-lg ms-2 hero-cta-toggle">Show more <i class="icon-arrow-down"></i></button>
             </p>
             <p class="description hidden" id="descriptionText2">
               Information about these partnerships is not always publicly available, and their broader implications remain unclear. To address this gap, APRI conducted an extensive online search using multiple search engines and databases. The search encompassed G20 and BRICS+ member states, as well as states with significant mining sectors, such as Chile, Cuba and Venezuela. Although this search yielded a significant number of partnerships,
               it is not exhaustive. The map and accompanying information will be updated regularly as knowledge of these partnerships expands.</p>
             <p class="description hidden" id="descriptionText3">
               For a comprehensive understanding, explore this interactive map in conjunction with the accompanying report (accessible via the link below), which provides an in-depth analysis of the most salient bilateral agreements with African states.
-              <button id="viewLessBtn" class="text-primary fs-lg ms-2">Show less <i class="icon-arrow-up"></i></button>
+              <button id="viewLessBtn" class="text-primary fs-lg ms-2 hero-cta-toggle">Show less <i class="icon-arrow-up"></i></button>
             </p>
           </div>
           <hr class="pt-3 mt-3" style="max-width:20px;">
@@ -55,18 +55,19 @@ include('header.inc.php');
 
 <section class="pt-5">
   <div class="print-div">
-    <div style=" display: flex; align-items: center; font-family:'Rubik',Helvetica,sans-serif; padding-top: 30px; width: 100%;
-      ">
-      <div class="small" style="flex-grow: 1;">
-        Explore state-level agreements regarding access to Africa's critical
-        minerals. Select a country on the map or a non-African partner on
-        the left-hand pane to view specific agreements.
-      </div>
-      <div style="display: flex; height: 100%; margin-left: 12px">
-        <button class="print-button" id="printPage" style="margin-left: auto; display: flex; align-items: center">
-        Print
-        <img src="<?php get_theme_url(); ?>/img/icons/print.svg" alt="Print Icon" class="print-icon" />
-        </button>
+    <div class="col-lg-10 mx-auto"> 
+      <div style=" display: flex; align-items: center; padding-top: 30px; width: 100%;">
+        <div class="mb-3" style="flex-grow: 1;">
+          Explore state-level agreements regarding access to Africa's critical
+          minerals. Select a country on the map or a non-African partner on
+          the left-hand pane to view specific agreements.
+        </div>
+        <div style="display: flex; height: 100%; margin-left: 12px">
+          <button class="print-button" id="printPage" style="margin-left: auto; display: flex; align-items: center">
+          Print
+          <img src="<?php get_theme_url(); ?>/img/icons/print.svg" alt="Print Icon" class="print-icon" />
+          </button>
+        </div>
       </div>
     </div>
     <div class="hidenthings">
@@ -97,11 +98,8 @@ include('header.inc.php');
     </div>
   </div>
 </div>
-<script>
-  // Set the theme URL for use in modules
-  window.THEME_URL = "<?php get_theme_url(); ?>";
-</script>
-<script type="module" src="<?php get_theme_url(); ?>/modules/picker.js"></script>
+<script>window.THEME_URL = "<?php get_theme_url(); ?>";</script>
+<script type="modules" src="<?php get_theme_url(); ?>/modules/picker.js"></script>
 <div id="printable" class="allview">
   <div class="first-col d-flex justify-content-end selectores col-4">
     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -233,7 +231,7 @@ include('header.inc.php');
         <h2 class="subtitleBlur">to start exploring the map</h2>
       </div>
     </div>
-    <script type="module" src="<?php get_theme_url(); ?>/main.js"></script>
+    <script type="modules" src="<?php get_theme_url(); ?>/main.js"></script>
     <div class="controls">
       <!-- Controles aquí -->
       <div class="control-toggle">
@@ -265,12 +263,12 @@ include('header.inc.php');
     </div>
   </div>
 </div>
- <div class="container-xl pt-5">
-    <div class="apri-separator pt-4 mb-4" style="max-width: 10%;"></div>
-    <div class="text-secondary">This mapping was produced under the supervision and leadership of the Geopolitics and Geoeconomics Program team: Amandine Gnanguênon and Emmanuel Baba Aduku. We wish to thank Pia Beuter and Lili Gabadadze for their contributions to data collection and analysis during their internship with the team. We extend our sincere thanks to Rajneesh Bhuee and Judy Hofmeyr, Research Fellows, for their expert contributions. We are equally grateful to Chris Vandome for his careful review. We also thank Micaela Rosadio, Internet Teapot and Stephen Oloh for their technical support in designing and developing the mapping and to Vincent Reich for coordinating the communication activities supporting this initiative. Most importantly, this work is a testament to the teamwork and commitment of everyone at APRI.</div>
-  </div>
+<div class="col-lg-10 container-xl pt-5">
+  <div class="apri-separator pt-4 mb-4" style="max-width: 10%;"></div>
+  <div class="text-secondary">This mapping was produced under the supervision and leadership of the Geopolitics and Geoeconomics Program team: Amandine Gnanguênon and Emmanuel Baba Aduku. We wish to thank Pia Beuter and Lili Gabadadze for their contributions to data collection and analysis during their internship with the team. We extend our sincere thanks to Rajneesh Bhuee and Judy Hofmeyr, Research Fellows, for their expert contributions. We are equally grateful to Chris Vandome for his careful review. We also thank Micaela Rosadio, Internet Teapot and Stephen Oloh for their technical support in designing and developing the mapping and to Vincent Reich for coordinating the communication activities supporting this initiative. Most importantly, this work is a testament to the teamwork and commitment of everyone at APRI.</div>
+</div>
 <div class="lastUpdate">
-  <span> Last update: 30.11.2024 </span>
+  <span> Last update: 06.03.2026 </span>
 </div>
 </div>
 </section>
